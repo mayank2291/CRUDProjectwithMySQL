@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container">
+        <h2 align="center">Welcome TO CRUD Operation with MYSQL.</h2>
+        <a href="/register" class="btn btn-sm btn-primary">Add User</a><br /><br />
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>Emp ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Email</th>
+                    <th>Phone No.</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each employeedetails}}
+                <tr>
+                    <th>{{this.id}}</th>
+                    <td>{{this.empname}}</td>
+                    <td>{{this.empemail}}</td>
+                    <td>{{this.empphonenumber}}</td>
+                    <td>
+                        <a href='/edit?id={{this.id}}' class="btn btn-sm btn-primary">Edit&nbsp;</a>
+                        <a href='/delete?id={{this.id}}' class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
