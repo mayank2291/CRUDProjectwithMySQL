@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+</head>
+
+<body>
+    <div class="container">
+        <h2 align="center">Welcome TO CRUD Operation with MYSQL.</h2>
+        <a href="/" class="btn btn-sm btn-primary">Home</a><br /><br />
+
+        <!-- Search form -->
+        <form action="/search-emp">
+            <div class="active-cyan-4 mb-4">                
+                <input class="form-control" type="search" name="empname" placeholder="Search" style="width: 31%; display:inline ;">
+                <input class="form-control" type="search" name="empemail" placeholder="Search" style="width: 31%; display:inline ;">
+                <input class="form-control" type="search" name="empempphonenumber" placeholder="Search" style="width: 31%; display:inline ;">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th>Emp ID</th>
+                    <th>Employee Name</th>
+                    <th>Employee Email</th>
+                    <th>Phone No.</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each employeedetails}}
+                <tr>
+                    <th>{{this.id}}</th>
+                    <td>{{this.empname}}</td>
+                    <td>{{this.empemail}}</td>
+                    <td>{{this.empphonenumber}}</td>                    
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

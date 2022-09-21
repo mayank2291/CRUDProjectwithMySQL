@@ -9,6 +9,9 @@
     <div class="container">
         <h2 align="center">Welcome TO CRUD Operation with MYSQL.</h2>
         <a href="/register" class="btn btn-sm btn-primary">Add User</a><br /><br />
+
+        <a href="/search" class="btn btn-sm btn-primary">Search User</a><br /><br />
+        
         <table class="table table-success table-striped">
             <thead>
                 <tr>
@@ -20,7 +23,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#each employeedetails}}
+                {{#each employeedetails}}                
                 <tr>
                     <th>{{this.id}}</th>
                     <td>{{this.empname}}</td>

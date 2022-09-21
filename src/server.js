@@ -7,7 +7,7 @@ const port = process.env.PORT || 2022;
 require("dotenv").config();
 const connection = require("../src/db/connection.js");
 const { registerPartials } = require("hbs");
-const static_path = path.join(__dirname, "../public");
+const static_path = path.join(__dirname, "../public/css");
 const template_path = path.join(__dirname, "../templates/views");
 const partials_path = path.join(__dirname, "../templates/partials");
 
@@ -75,8 +75,7 @@ app.get("/edit", (req, res) => {
 
 app.post("/update", (req, res) => {
   const id = req.body.id;
-  
-  console.log("ID = ", id);
+
   const updateQuery =
     "update employeedetails SET empname='" +
     req.body.empname +
@@ -113,8 +112,48 @@ app.get("/delete", (req, res) => {
   );
 });
 
+app.get("/search", (req, res) => {
+  let sql = "SELECT * FROM employeedetails";
+  let querry = connection.query(sql, (err, rows) => {
+    if (err) throw err;
+
+    res.render("search", {
+      employeedetails: rows,
+    });
+  });
+});
+
+app.get("/search-emp", (req, res) => {
+  const id = req.query.id;
+  const empname = req.query.empname;
+  const empemail = req.query.empemail;
+  const empphonenumber = req.query.empphonenumber;
+
+  try {
+    const searchQuery =
+      "SELECT * FROM employeedetails WHERE empname LIKE '%" +
+      empname +
+      "%' AND empemail LIKE '%" +
+      empemail +
+      "%' AND empphonenumber LIKE '%" +
+      empphonenumber +
+      "%'";
+      console.log(searchQuery);
+    const querry = connection.query(searchQuery, (err, rows) => {      
+      if (err) console.log(err);
+
+      res.render("search", {
+        employeedetails: rows,
+      });
+      console.log({ employeedetails: rows });
+    });
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 app.get("/", (req, res) => {
-  res.send("CRUD Operation With MYSQL Project");
+  res.send("CRUD Operation With MYSQL.");
 });
 
 app.listen(port, () => {
