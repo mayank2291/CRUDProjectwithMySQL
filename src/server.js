@@ -138,14 +138,13 @@ app.get("/search-emp", (req, res) => {
       "%' AND empphonenumber LIKE '%" +
       empphonenumber +
       "%'";
-      console.log(searchQuery);
+      
     const querry = connection.query(searchQuery, (err, rows) => {      
       if (err) console.log(err);
 
       res.render("search", {
         employeedetails: rows,
-      });
-      console.log({ employeedetails: rows });
+      });      
     });
   } catch (error) {
     res.send(error);
